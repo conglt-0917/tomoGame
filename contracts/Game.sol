@@ -49,7 +49,20 @@ contract Game is AccessControl {
 
         require(value > 0, "value must be > 0");
         require(player != address(0x0), "address must be != 0x0");
+        require(playerAlias != address(0x0), "address alias must be != 0x0");
+
         playerAlias.transfer(value);
+    }
+
+    function withdrawFromAlias(address payable player) external payable {
+        address payable playerAlias = msg.sender;
+        uint amount = msg.value - 50000000000000000;
+
+        require(amount > 0);
+        require(player != address(0x0), "address must be != 0x0");
+        require(playerAlias != address(0x0), "address alias must be != 0x0");
+
+        player.transfer(amount);
     }
 
     // check 1 address đã tồn tại trong 1 mảng hay chưa 
